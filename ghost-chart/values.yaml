@@ -1,0 +1,65 @@
+replicaCount: 1
+
+image:
+  repository: ghost
+  tag: "6.5"
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    helm.sh/resource-policy: keep
+  hosts:
+    - host: rebalancer.atarnet.org
+      path: /
+  tls: []
+
+persistence:
+  enabled: true
+  existingClaim: ""
+  accessMode: ReadWriteOnce
+  size: 10Gi
+  storageClass: ""
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+env:
+  url: https://rebalancer.atarnet.org
+  database__client: sqlite3
+  database__connection__filename: /var/lib/ghost/content/data/ghost.db
+
+extraEnv: []
+
+extraEnvFrom: []
+
+extraVolumeMounts: []
+
+extraVolumes: []

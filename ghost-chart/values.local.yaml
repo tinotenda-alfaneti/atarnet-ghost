@@ -1,0 +1,11 @@
+# Overrides for running the chart against Docker Desktop's built-in Kubernetes.
+
+ingress:
+  enabled: false
+
+env:
+  url: http://localhost:2368
+  mail__transport: Direct
+
+persistence:
+  enabled: false
