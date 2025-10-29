@@ -32,7 +32,7 @@ ingress:
     nginx.ingress.kubernetes.io/rewrite-target: /
     helm.sh/resource-policy: keep
   hosts:
-    - host: rebalancer.atarnet.org
+    - host: blog.atarnet.org
       path: /
   tls: []
 
@@ -52,7 +52,7 @@ tolerations: []
 affinity: {}
 
 env:
-  url: https://rebalancer.atarnet.org
+  url: https://blog.atarnet.org
   database__client: sqlite3
   database__connection__filename: /var/lib/ghost/content/data/ghost.db
 
