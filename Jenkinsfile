@@ -107,9 +107,10 @@ pipeline {
             steps {
                 withCredentials([file(credentialsId: "${KUBECONFIG_CRED}", variable: 'KUBECONFIG_FILE')]) {
                 sh '''
-                    export KUBECONFIG=$WORKSPACE/.kube/config
+                    export KUBECONFIG="$WORKSPACE/.kube/config"
+                    export PATH="$CACHE_DIR:$PATH"
                     echo "Ensuring namespace ${NAMESPACE} exists..."
-                    $CACHE_DIR/kubectl create namespace ${NAMESPACE} --dry-run=client -o yaml | kubectl apply -f -
+                    "$CACHE_DIR/kubectl" create namespace "${NAMESPACE}" --dry-run=client -o yaml | "$CACHE_DIR/kubectl" apply -f -
 
                     echo "Namespace setup complete for ${NAMESPACE}"
                 '''
