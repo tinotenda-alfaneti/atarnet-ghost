@@ -27,8 +27,6 @@ pipeline {
         stage('Install Tools') {
             steps {
                 sh '''
-                    set -euo pipefail
-
                     echo "[Setup] Preparing tool cache..."
                     CACHE_DIR="${CACHE_DIR:-/var/jenkins_home/cache/bin}"
                     mkdir -p "$CACHE_DIR"
