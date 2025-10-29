@@ -74,7 +74,7 @@ spec:
         {{- if .Values.persistence.enabled }}
         - name: ghost-content
           persistentVolumeClaim:
-            claimName: {{- if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{ else }}{{ include "ghost.fullname" . }}-pvc{{ end }}
+            claimName: {{ (default (printf "%s-pvc" (include "ghost.fullname" .)) .Values.persistence.existingClaim) | quote }}
         {{- end }}
         {{- with .Values.extraVolumes }}
         {{- toYaml . | nindent 8 }}

@@ -39,7 +39,7 @@ Docker Desktop ships with a single-node Kubernetes cluster. These steps assume y
 
 5. **Access Ghost locally**
    ```bash
-   kubectl port-forward svc/ghost -n blog 2368:80
+   kubectl port-forward svc/ghost-ghost -n blog 2368:80
    ```
    Then browse to [http://localhost:2368](http://localhost:2368). The Ghost admin setup wizard appears on first launch.
    The local overrides set `mail__transport=Direct` so the initial admin signup works without configuring SMTP.
