@@ -30,12 +30,13 @@ ingress:
   className: nginx
   annotations:
     kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/from-to-www-redirect: "false"
     nginx.ingress.kubernetes.io/use-regex: "false"
     nginx.ingress.kubernetes.io/rewrite-target: /
     helm.sh/resource-policy: keep
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_set_header X-Forwarded-Proto https;
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/use-forwarded-headers: "true"
   hosts:
     - host: blog.atarnet.org
       path: /
@@ -60,6 +61,7 @@ env:
   url: https://blog.atarnet.org
   database__client: sqlite3
   database__connection__filename: /var/lib/ghost/content/data/ghost.db
+  trustedProxy: 10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
 
 extraEnv: []
 
