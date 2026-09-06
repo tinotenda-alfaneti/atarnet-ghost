@@ -40,6 +40,8 @@ ingress:
   hosts:
     - host: blog.atarnet.org
       path: /
+    - host: blog.alfaneti.uk
+      path: /
   tls: []
 
 persistence:
